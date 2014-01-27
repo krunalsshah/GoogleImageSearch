@@ -37,6 +37,8 @@ public class GoogleImageSearchActivity extends Activity {
 			TYPE = "imgtype", SITE = "as_sitesearch", COLOR = "imgcolor",
 			SIZE = "imgsz", RES_SIZE = "rsz", START = "start", VER = "v",
 			RESPONSE_DATA = "responseData", RESULTS = "results";
+	public static final String SEARCH_TERM = "searchTerm";
+	private SearchCriteria serachCriteria;
 
 	ArrayList<GoogleSearchResult> imageResults = new ArrayList<GoogleSearchResult>();
 	GoogleImageSearchAdapter imageAdapter;
@@ -45,7 +47,15 @@ public class GoogleImageSearchActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_google_image_search);
+		if(getIntent().getSerializableExtra(SearchCriteriaActivity.SEARCH_CRITERIA) != null){
+			serachCriteria = (SearchCriteria) getIntent().getSerializableExtra(SearchCriteriaActivity.SEARCH_CRITERIA);
+		}else{
+			serachCriteria = new SearchCriteria(null, null, null, null, null);
+		}		 
 		initializeViews();
+		if(!isNullEmpty(serachCriteria.getQuery())){
+			etSearchTerm.setText(serachCriteria.getQuery());
+		}
 		setAdapters();
 		setListeners();
 
@@ -70,7 +80,8 @@ public class GoogleImageSearchActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View parent,
 					int position, long rowId) {
-				Intent i = new Intent(getApplicationContext(), FullImageDisplayActivity.class);		
+				Intent i = new Intent(getApplicationContext(),
+						FullImageDisplayActivity.class);
 				i.putExtra("result", imageResults.get(position));
 				startActivity(i);
 			}
@@ -82,23 +93,24 @@ public class GoogleImageSearchActivity extends Activity {
 		imageAdapter = new GoogleImageSearchAdapter(this, imageResults);
 		gvResult.setAdapter(imageAdapter);
 	}
-	
+
 	public void showFilterCriteria(MenuItem mi) {
-	     Intent i = new Intent(GoogleImageSearchActivity.this, SearchCriteriaActivity.class);
-	     startActivity(i);
-	  }
+		Intent i = new Intent(GoogleImageSearchActivity.this,
+				SearchCriteriaActivity.class);
+		i.putExtra(SEARCH_TERM, etSearchTerm.getText().toString());
+		startActivity(i);
+	}
 
 	public void queryForImage(View v) {
-		String searchTerm = etSearchTerm.getText().toString();
-		if (isNullEmpty(searchTerm)) {
+		if (isNullEmpty(etSearchTerm.getText().toString())) {
 			Toast.makeText(getApplicationContext(),
 					"Please enter the Image Search Key Word", Toast.LENGTH_LONG)
 					.show();
 			return;
 		}
+		serachCriteria.setQuery(etSearchTerm.getText().toString());
 		AsyncHttpClient client = new AsyncHttpClient();
-		client.get(getQueryUrl(new SearchCriteria(searchTerm, null, null, null,
-				null)), new JsonHttpResponseHandler() {
+		client.get(getQueryUrl(serachCriteria), new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject response) {
 				try {

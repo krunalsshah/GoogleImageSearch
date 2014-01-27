@@ -1,7 +1,10 @@
 package com.codepath.googleimagesearch.dto;
 
-public class SearchCriteria {
+import java.io.Serializable;
+
+public class SearchCriteria implements Serializable{
 	
+	private static final long serialVersionUID = -9002967499817957733L;
 	private String query;
 	private String site;//as_sitesearch
 	private String color; //imgcolor
@@ -22,6 +25,12 @@ public class SearchCriteria {
 	public String getQuery() {
 		return query;
 	}
+	
+	
+	public void setQuery(String query) {
+		this.query = query;
+	}
+
 	public String getSite() {
 		return site;
 	}
