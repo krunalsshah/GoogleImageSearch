@@ -21,6 +21,7 @@
     <string name="img_site">Site Filter</string>
     
     <string-array name="color_array">
+        <item>all</item>
         <item>black</item>
         <item>blue</item>
         <item>brown</item>
@@ -36,6 +37,7 @@
     </string-array>
         
     <string-array name="size_array">
+        <item>all</item>
         <item>icon</item>
         <item>small</item>
         <item>medium</item>
@@ -46,6 +48,7 @@
     </string-array>
     
     <string-array name="type_array">
+        <item>all</item>
         <item>face</item>
         <item>photo</item>
         <item>clipart</item>

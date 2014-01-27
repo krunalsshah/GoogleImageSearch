@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.googleimagesearch.adapter.GoogleImageSearchAdapter;
@@ -39,6 +40,8 @@ public class GoogleImageSearchActivity extends Activity {
 			RESPONSE_DATA = "responseData", RESULTS = "results";
 	public static final String SEARCH_TERM = "searchTerm";
 	private SearchCriteria serachCriteria;
+	private TextView tvFilterSizeL, tvFilterColorL, tvFilterTypeL,
+			tvFilterSiteL;
 
 	ArrayList<GoogleSearchResult> imageResults = new ArrayList<GoogleSearchResult>();
 	GoogleImageSearchAdapter imageAdapter;
@@ -47,13 +50,15 @@ public class GoogleImageSearchActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_google_image_search);
-		if(getIntent().getSerializableExtra(SearchCriteriaActivity.SEARCH_CRITERIA) != null){
-			serachCriteria = (SearchCriteria) getIntent().getSerializableExtra(SearchCriteriaActivity.SEARCH_CRITERIA);
-		}else{
+		if (getIntent().getSerializableExtra(
+				SearchCriteriaActivity.SEARCH_CRITERIA) != null) {
+			serachCriteria = (SearchCriteria) getIntent().getSerializableExtra(
+					SearchCriteriaActivity.SEARCH_CRITERIA);
+		} else {
 			serachCriteria = new SearchCriteria(null, null, null, null, null);
-		}		 
+		}
 		initializeViews();
-		if(!isNullEmpty(serachCriteria.getQuery())){
+		if (!isNullEmpty(serachCriteria.getQuery())) {
 			etSearchTerm.setText(serachCriteria.getQuery());
 		}
 		setAdapters();
@@ -72,6 +77,10 @@ public class GoogleImageSearchActivity extends Activity {
 		etSearchTerm = (EditText) findViewById(R.id.etSearchTerm);
 		btnGo = (Button) findViewById(R.id.btnGo);
 		gvResult = (GridView) findViewById(R.id.gvResult);
+		tvFilterSizeL = (TextView) findViewById(R.id.tvFilterSizeL);
+		tvFilterColorL = (TextView) findViewById(R.id.tvFilterColorL);
+		tvFilterTypeL = (TextView) findViewById(R.id.tvFilterTypeL);
+		tvFilterSiteL = (TextView) findViewById(R.id.tvFilterSiteL);
 	}
 
 	private void setListeners() {
@@ -108,6 +117,7 @@ public class GoogleImageSearchActivity extends Activity {
 					.show();
 			return;
 		}
+		changeSelectedFilterVisibility();
 		serachCriteria.setQuery(etSearchTerm.getText().toString());
 		AsyncHttpClient client = new AsyncHttpClient();
 		client.get(getQueryUrl(serachCriteria), new JsonHttpResponseHandler() {
@@ -125,6 +135,35 @@ public class GoogleImageSearchActivity extends Activity {
 			}
 
 		});
+	}
+
+	private void changeSelectedFilterVisibility() {
+		tvFilterSizeL.setVisibility(View.VISIBLE);
+		tvFilterColorL.setVisibility(View.VISIBLE);
+		tvFilterTypeL.setVisibility(View.VISIBLE);
+		tvFilterSiteL.setVisibility(View.VISIBLE);
+
+		if (isNullEmpty(serachCriteria.getSize())) {
+			tvFilterSizeL.setText("Size Filter : all");
+		} else {
+			tvFilterSizeL.setText("Size Filter : " + serachCriteria.getSize());
+		}
+		if (isNullEmpty(serachCriteria.getColor())) {
+			tvFilterColorL.setText("Color Filter : all");
+		} else {
+			tvFilterColorL.setText("Color Filter : "
+					+ serachCriteria.getColor());
+		}
+		if (isNullEmpty(serachCriteria.getType())) {
+			tvFilterTypeL.setText("Type Filter : all");
+		} else {
+			tvFilterTypeL.setText("Type Filter : " + serachCriteria.getType());
+		}
+		if (isNullEmpty(serachCriteria.getSite())) {
+			tvFilterSiteL.setText("Site Filter : all");
+		} else {
+			tvFilterSiteL.setText("Site Filter : " + serachCriteria.getSite());
+		}		
 	}
 
 	private String getQueryUrl(SearchCriteria searchCriteria) {

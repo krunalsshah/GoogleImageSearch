@@ -42,11 +42,48 @@
     <GridView
         android:id="@+id/gvResult"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="295dp"
         android:layout_alignLeft="@+id/llSearch"
         android:layout_below="@+id/llSearch"
         android:numColumns="3" >
     </GridView>
+    
+    <TextView
+        android:id="@+id/tvFilterSizeL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gvResult"
+        android:layout_marginLeft="15dp"
+        android:text="@string/img_site"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/tvFilterColorL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvFilterSizeL"
+        android:layout_marginLeft="15dp"
+        android:text="@string/img_site"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/tvFilterTypeL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvFilterColorL"
+        android:layout_marginLeft="15dp"
+        android:text="@string/img_site"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/tvFilterSiteL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvFilterTypeL"
+        android:layout_marginLeft="15dp"
+        android:text="@string/img_site"
+        android:visibility="gone"
+        />    
 
 </RelativeLayout>
    
