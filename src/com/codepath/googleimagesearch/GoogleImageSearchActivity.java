@@ -6,18 +6,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.codepath.googleimagesearch.adapter.GoogleImageSearchAdapter;
-import com.codepath.googleimagesearch.dto.GoogleSearchResult;
-import com.codepath.googleimagesearch.dto.SearchCriteria;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -25,6 +20,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.codepath.googleimagesearch.adapter.GoogleImageSearchAdapter;
+import com.codepath.googleimagesearch.dto.GoogleSearchResult;
+import com.codepath.googleimagesearch.dto.SearchCriteria;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class GoogleImageSearchActivity extends Activity {
 
@@ -81,6 +82,11 @@ public class GoogleImageSearchActivity extends Activity {
 		imageAdapter = new GoogleImageSearchAdapter(this, imageResults);
 		gvResult.setAdapter(imageAdapter);
 	}
+	
+	public void showFilterCriteria(MenuItem mi) {
+	     Intent i = new Intent(GoogleImageSearchActivity.this, SearchCriteriaActivity.class);
+	     startActivity(i);
+	  }
 
 	public void queryForImage(View v) {
 		String searchTerm = etSearchTerm.getText().toString();

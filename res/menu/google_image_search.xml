@@ -4,6 +4,7 @@
         android:id="@+id/miFilterBy"
         android:icon="@drawable/ic_filter_criteria"
         android:showAsAction="ifRoom"
+        android:onClick="showFilterCriteria"
         android:title="@string/filter_by">
     </item>
 
