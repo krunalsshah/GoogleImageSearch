@@ -9,5 +9,47 @@
     <string name="enter_term">Image Search Term</string>
     <string name="title_activity_full_image_display">FullImageDisplayActivity</string>
     <string name="title_activity_search_criteria">SearchCriteriaActivity</string>
+    <string name="adv_search_options">Advanced Search Option</string>
+    <string name="site_filter">example.com</string>
+    <string name="save">Save</string>
+    <string name="color_prompt">Select Color</string>
+    <string name="size_prompt">Select Size</string>
+    <string name="type_prompt">Select Type</string>
+    <string name="image_size">Size Filter</string>
+    <string name="image_color">Color Filter</string>
+    <string name="img_type">Type Filter</string>
+    <string name="img_site">Site Filter</string>
+    
+    <string-array name="color_array">
+        <item>black</item>
+        <item>blue</item>
+        <item>brown</item>
+        <item>gray</item>
+        <item>green</item>
+        <item>orange</item>
+        <item>pink</item>
+        <item>purple</item>
+        <item>red</item>
+        <item>teal</item>
+        <item>white</item>
+        <item>yellow</item>
+    </string-array>
+        
+    <string-array name="size_array">
+        <item>icon</item>
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
+        <item>xlarge</item>
+        <item>xxlarge</item>
+        <item>huge</item>
+    </string-array>
+    
+    <string-array name="type_array">
+        <item>face</item>
+        <item>photo</item>
+        <item>clipart</item>
+        <item>lineart</item>
+    </string-array>
 
 </resources>
