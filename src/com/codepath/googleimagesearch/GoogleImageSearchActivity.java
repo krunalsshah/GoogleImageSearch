@@ -125,6 +125,7 @@ public class GoogleImageSearchActivity extends Activity {
 			return;
 		}
 		changeSelectedFilterVisibility();
+		imageResults.clear();
 		serachCriteria.setQuery(etSearchTerm.getText().toString());
 		makeRestCall(0);
 	}
@@ -137,7 +138,7 @@ public class GoogleImageSearchActivity extends Activity {
 				try {
 					JSONArray joArray = response.getJSONObject(RESPONSE_DATA)
 							.getJSONArray(RESULTS);
-					imageResults.clear();
+					
 					imageAdapter.addAll(GoogleSearchResult
 							.fromJSONArray(joArray));
 				} catch (JSONException e) {
