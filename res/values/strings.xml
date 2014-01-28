@@ -19,7 +19,8 @@
     <string name="image_color">Color Filter</string>
     <string name="img_type">Type Filter</string>
     <string name="img_site">Site Filter</string>
-    
+    <string name="share">Share</string>
+
     <string-array name="color_array">
         <item>all</item>
         <item>black</item>
@@ -35,7 +36,6 @@
         <item>white</item>
         <item>yellow</item>
     </string-array>
-        
     <string-array name="size_array">
         <item>all</item>
         <item>icon</item>
@@ -46,7 +46,6 @@
         <item>xxlarge</item>
         <item>huge</item>
     </string-array>
-    
     <string-array name="type_array">
         <item>all</item>
         <item>face</item>
