@@ -41,8 +41,8 @@
 
     <GridView
         android:id="@+id/gvResult"
-        android:layout_width="match_parent"
-        android:layout_height="295dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/llSearch"
         android:layout_below="@+id/llSearch"
         android:numColumns="3" >

@@ -101,6 +101,13 @@ public class GoogleImageSearchActivity extends Activity {
 	private void setAdapters() {
 		imageAdapter = new GoogleImageSearchAdapter(this, imageResults);
 		gvResult.setAdapter(imageAdapter);
+		gvResult.setOnScrollListener(new EndlessScrollListener() {
+			
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				 customLoadMoreDataFromApi(page); 				
+			}
+		});
 	}
 
 	public void showFilterCriteria(MenuItem mi) {
@@ -119,8 +126,12 @@ public class GoogleImageSearchActivity extends Activity {
 		}
 		changeSelectedFilterVisibility();
 		serachCriteria.setQuery(etSearchTerm.getText().toString());
+		makeRestCall(0);
+	}
+	
+	public void makeRestCall(int offset){
 		AsyncHttpClient client = new AsyncHttpClient();
-		client.get(getQueryUrl(serachCriteria), new JsonHttpResponseHandler() {
+		client.get(getQueryUrl(serachCriteria, offset), new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject response) {
 				try {
@@ -166,13 +177,13 @@ public class GoogleImageSearchActivity extends Activity {
 		}		
 	}
 
-	private String getQueryUrl(SearchCriteria searchCriteria) {
+	private String getQueryUrl(SearchCriteria searchCriteria, int offset) {
 		StringBuffer sb = new StringBuffer();
 		if (searchCriteria == null || isNullEmpty(searchCriteria.getQuery())) {
 			return null;
 		}
 		sb.append(BASE_URL + Q + RES_SIZE + EQ + 8);
-		sb.append(AMP + START + EQ + 0);
+		sb.append(AMP + START + EQ + offset);
 		sb.append(AMP + VER + EQ + 1.0);
 		sb.append(AMP + QUERY + EQ + Uri.encode(searchCriteria.getQuery()));
 		if (!isNullEmpty(searchCriteria.getColor())) {
@@ -194,6 +205,10 @@ public class GoogleImageSearchActivity extends Activity {
 
 	private boolean isNullEmpty(String value) {
 		return (value == null || value.isEmpty());
+	}
+	
+	public void customLoadMoreDataFromApi(int offset) {
+		makeRestCall(offset);
 	}
 
 }
