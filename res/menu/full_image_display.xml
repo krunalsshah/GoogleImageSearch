@@ -5,6 +5,8 @@
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:showAsAction="ifRoom"
         android:title="@string/share"
-        android:onClick="onShareItem"/>
+        android:onClick="onShareItem"
+        android:enabled="true"
+        />
 
 </menu>
